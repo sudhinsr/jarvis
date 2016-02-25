@@ -22,7 +22,7 @@ class STT(object):
 		self._decoder.process_raw(data, False, True)
 		self._decoder.end_utt()
 		hypothesis = self._decoder.hyp()
-		result = 0
+		result = "0"
 		if hasattr ( hypothesis , 'hypstr' ) :
 			result = hypothesis.hypstr
 		print result
