@@ -2,7 +2,7 @@ import os
 import tempfile
 import subprocess
 
-class EspeakTTS(object):
+class TTS(object):
 	
     def __init__(self, voice='default+m3', pitch_adjustment=40, words_per_minute=160) :
         

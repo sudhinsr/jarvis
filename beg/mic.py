@@ -3,8 +3,6 @@ import pyaudio
 import audioop
 import os
 import tempfile
-from stt import PocketSphinxSTT
-from tts import EspeakTTS
 
 class Mic(object):
 
@@ -160,7 +158,9 @@ class Mic(object):
             # check if PERSONA was said
             transcribed = self.passive_stt_engine.translate(f)
 
-        if any(PERSONA in phrase for phrase in transcribed):
+        #if any(PERSONA in phrase for phrase in transcribed):
+        if (PERSONA in transcribed): 
+            print "hello detected"
             return (THRESHOLD, PERSONA)
 
 
@@ -228,17 +228,4 @@ class Mic(object):
 
 
 
-
-stt_engine = PocketSphinxSTT()
-tts_engine = EspeakTTS()
-app = Mic(tts_engine, stt_engine, stt_engine)
-
-while True:
-
-    threshold, translate = app.passiveListen("hello")
-    if not translate or not threshold:
-        continue
-
-    input = app.activeListen(threshold)
-    print input
 

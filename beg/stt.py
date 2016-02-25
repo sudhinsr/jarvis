@@ -1,7 +1,7 @@
 import pocketsphinx as ps
 from os import path
 
-class PocketSphinxSTT(object):
+class STT(object):
 	
 	def __init__(self):
 
@@ -22,6 +22,8 @@ class PocketSphinxSTT(object):
 		self._decoder.process_raw(data, False, True)
 		self._decoder.end_utt()
 		hypothesis = self._decoder.hyp()
-		result = hypothesis.hypstr
+		result = 0
+		if hasattr ( hypothesis , 'hypstr' ) :
+			result = hypothesis.hypstr
 		print result
 		return result
