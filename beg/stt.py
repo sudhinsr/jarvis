@@ -5,13 +5,18 @@ class STT(object):
 	
 	def __init__(self):
 
-		modeldir = '/home/sudhin/pocketsphinx-5prealpha/model'
+		"""modeldir = '/home/sudhin/pocketsphinx-5prealpha/model'
 		config = ps.Decoder.default_config()
 		config.set_string('-hmm', path.join(modeldir, 'en-us/en-us'))
 		config.set_string('-lm', path.join(modeldir, 'en-us/en-us.lm.bin'))
 		config.set_string('-dict', path.join(modeldir, 'en-us/cmudict-en-us.dict'))
+		self._decoder = ps.Decoder(config)"""
+	
+		config = ps.Decoder.default_config()
+		config.set_string('-hmm','/usr/local/share/pocketsphinx/model/en-us/en-us')
+		config.set_string('-lm', '/home/sudhin/beg/mine/1631.lm')
+		config.set_string('-dict','/home/sudhin/beg/mine/1631.dic')
 		self._decoder = ps.Decoder(config)
-
 
 	def translate(self, fp):
 
@@ -22,8 +27,10 @@ class STT(object):
 		self._decoder.process_raw(data, False, True)
 		self._decoder.end_utt()
 		hypothesis = self._decoder.hyp()
-		result = "0"
+		result = []
 		if hasattr ( hypothesis , 'hypstr' ) :
-			result = hypothesis.hypstr
+			result = [hypothesis.hypstr]
+
 		print result
+		
 		return result

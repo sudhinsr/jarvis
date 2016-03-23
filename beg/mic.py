@@ -160,7 +160,7 @@ class Mic(object):
 
         #if any(PERSONA in phrase for phrase in transcribed):
         if (PERSONA in transcribed): 
-            print "hello detected"
+            print "jarvis detected"
             return (THRESHOLD, PERSONA)
 
 

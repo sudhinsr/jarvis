@@ -1,7 +1,7 @@
 from stt import STT
 from tts import TTS
 from mic import Mic
-from control import Control
+from selection import Selection
 
 class Text(object):
 	
@@ -10,18 +10,18 @@ class Text(object):
 		self.stt_engine = STT()
 		self.tts_engine = TTS()
 		self.mic = Mic(self.tts_engine, self.stt_engine, self.stt_engine)
-		self.control = Control() 
+		self.selection = Selection(self.tts_engine) 
 
 	def handle(self):
 
 		while True:
-			threshold, translate = self.mic.passiveListen("hello")
+			threshold, translate = self.mic.passiveListen("JARVIS")
 			if not translate or not threshold:
 				continue
 			input = self.mic.activeListen(threshold)
 			print input
 			if input:
-				string = self.control.get(input);
+				string = self.selection.select(input);
 			else :
 				self.tts_engine.say("Pardon?")
 
