@@ -1,0 +1,53 @@
+Language model created by QuickLM on Wed Mar 23 01:27:59 EDT 2016
+Copyright (c) 1996-2010 Carnegie Mellon University and Alexander I. Rudnicky
+
+The model is in standard ARPA format, designed by Doug Paul while he was at MITRE.
+
+The code that was used to produce this language model is available in Open Source.
+Please visit http://www.speech.cs.cmu.edu/tools/ for more information
+
+The (fixed) discount mass is 0.5. The backoffs are computed using the ratio method.
+This model based on a corpus of 7 sentences and 9 words
+
+\data\
+ngram 1=9
+ngram 2=14
+ngram 3=7
+
+\1-grams:
+-0.7782 </s> -0.3010
+-0.7782 <s> -0.2218
+-1.6232 CURRENT -0.2218
+-1.6232 HUMIDITY -0.2218
+-1.6232 JARVIS -0.2218
+-1.6232 JOKE -0.2218
+-1.6232 NEWS -0.2218
+-1.6232 TEMPERATURE -0.2218
+-1.6232 TIME -0.2218
+
+\2-grams:
+-1.1461 <s> CURRENT 0.0000
+-1.1461 <s> HUMIDITY 0.0000
+-1.1461 <s> JARVIS 0.0000
+-1.1461 <s> JOKE 0.0000
+-1.1461 <s> NEWS 0.0000
+-1.1461 <s> TEMPERATURE 0.0000
+-1.1461 <s> TIME 0.0000
+-0.3010 CURRENT </s> -0.3010
+-0.3010 HUMIDITY </s> -0.3010
+-0.3010 JARVIS </s> -0.3010
+-0.3010 JOKE </s> -0.3010
+-0.3010 NEWS </s> -0.3010
+-0.3010 TEMPERATURE </s> -0.3010
+-0.3010 TIME </s> -0.3010
+
+\3-grams:
+-0.3010 <s> CURRENT </s>
+-0.3010 <s> HUMIDITY </s>
+-0.3010 <s> JARVIS </s>
+-0.3010 <s> JOKE </s>
+-0.3010 <s> NEWS </s>
+-0.3010 <s> TEMPERATURE </s>
+-0.3010 <s> TIME </s>
+
+\end\

@@ -14,8 +14,8 @@ class STT(object):
 	
 		config = ps.Decoder.default_config()
 		config.set_string('-hmm','/usr/local/share/pocketsphinx/model/en-us/en-us')
-		config.set_string('-lm', '/home/sudhin/beg/mine/1631.lm')
-		config.set_string('-dict','/home/sudhin/beg/mine/1631.dic')
+		config.set_string('-lm', '/home/sudhin/beg/mine/1894.lm')
+		config.set_string('-dict','/home/sudhin/beg/mine/1894.dic')
 		self._decoder = ps.Decoder(config)
 
 	def translate(self, fp):
