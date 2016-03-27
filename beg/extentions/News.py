@@ -1,7 +1,7 @@
 # -*- coding: utf-8-*-
 import re
 import feedparser
-from tts import TTS
+
 
 WORDS = ["NEWS"]
 
