@@ -1,6 +1,10 @@
 from flask import Flask, request, render_template, redirect, url_for
 from flaskext.mysql import MySQL
+from tts import TTS
+from selection import Selection
 
+tts=TTS()
+s=Selection(tts)
 mysql=MySQL()
 app=Flask(__name__)
 app.config['MYSQL_DATABASE_USER']='root'
@@ -25,11 +29,20 @@ def auth():
 			return redirect(url_for('home',name=data[0]))
 	return render_template('index.html')
 
+@app.route("/speech",methods=['GET','POST'])
+def speech():
+	qry=[]
+	txt=request.args.get('txt')
+	qry.append(txt)
+	s.select(qry)
+	return 
+
+
 @app.route("/home",methods=['GET','POST'])
 def home():
 	if request.method == 'POST':
 		switch1=request.form["switch1"]
-		switch2=request.form["switch2"]
+		switch2=requst.form["switch2"]
 		"""switch1=op(switch1)
 		switch2=op(switch2)"""
 		print switch1
@@ -53,4 +66,4 @@ def home():
 
 if __name__ == '__main__':
 	app.debug = True
-	app.run()
+	app.run(host="192.168.0.110")
