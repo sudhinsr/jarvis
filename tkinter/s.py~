@@ -55,7 +55,7 @@ class App:
 			else:
 				return "Off"
 
-		self.cur.execute("select humidity,temperature from sensor order by date desc limit 1")
+		self.cur.execute("select humidity,temperature from sensor order by date desc")
 		sen = self.cur.fetchone()
 		self.cur.execute("select status from switch where s_id = 1 order by time desc limit 1")
 		s1 = self.cur.fetchone()

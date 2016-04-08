@@ -1,7 +1,8 @@
-from flask import Flask, request, render_template, redirect, url_for
+from flask import Flask, request, render_template, redirect, url_for,Response
 from flaskext.mysql import MySQL
 from tts import TTS
 from selection import Selection
+from camera import VideoCamera
 
 tts=TTS()
 s=Selection(tts)
@@ -63,6 +64,19 @@ def home():
 	switch2=cursor.fetchone()
 
 	return render_template('home.html',data=data,humidity=sensor[0],temperature=sensor[1],switch1=switch1[1],switch2=switch2[1])
+
+def gen(camera):
+	while True:
+		frame = camera.get_frame()
+		yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
+
+@app.route('/video')
+def video_feed():
+	return Response(gen(VideoCamera()),mimetype='multipart/x-mixed-replace; boundary=frame')
+
+
+
+
 
 if __name__ == '__main__':
 	app.debug = True
