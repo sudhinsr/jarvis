@@ -1,9 +1,5 @@
 {% extends "base.html" %}
-{% block head %}
-<!--<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" media="screen"
-     href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">-->
-{% endblock %}
+
 {% block content %}
 <!--{{ data }}-->
 
@@ -13,7 +9,7 @@
  <div class="grid">
 
 
-      <div class="grid__col--7">
+      <div class="grid__col--6">
   
       <p id="demo"></p>
 
@@ -25,24 +21,26 @@ document.getElementById("demo").innerHTML = d;
     <form action="" method="post">
       <span>
       Switch &nbsp;:
-		  <button {% if switch == "On" %} class="btn--success" {% else %} class="btn--error" {% endif %} name="device" value="switch{{ switch }}">{{ switch }}</button></span>
-      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		  <button type="submit" {% if switch == "On" %} class="btn--success" {% else %} class="btn--error" {% endif %} name="device" value="switch{{ switch }}">{{ switch }}</button></span>
+      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		  Light&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
-		  <button {% if light == "On" %} class="btn--success" {% else %} class="btn--error" {% endif %} name="device" value="light{{ light }}">{{ light }}</button></span>
+		  <button type="submit" {% if light == "On" %} class="btn--success" {% else %} class="btn--error" {% endif %} name="device" value="light{{ light }}">{{ light }}</button></span>
 		
     </form>
-
-<div id="datetimepicker" class="input-append date">
-      <input type="text"></input>
-      <span class="add-on">
-        <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
-      </span>
-    </div>
-
+<h4>Notifications</h4>
+<form class="form" method="post">
+<input class="form__input" id="datetimepicker" type="text" placeholder="Date/Time">
+<textarea class="form__input" name="msg" placeholder="Message..." rows="2"></textarea>
+<button type="submit" class="btn--info">Insert</button>
+</form>
+<script type="text/javascript">jQuery('#datetimepicker').datetimepicker();</script>
 
      
   </div>
-      <div class="grid__col--4">
+
+  <div class="grid__col--5">
+  </div>
+      <div class="grid__col--3">
         <h4>Room Status</h4>
         <div class="offcanvas">
           <span class="icn--close">
@@ -57,27 +55,5 @@ document.getElementById("demo").innerHTML = d;
         </div>
       </div>
     </div>
-
-{% endblock %}
-
-{% block down %}
-<!--<script type="text/javascript"
-     src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js">
-    </script> 
-    <script type="text/javascript"
-     src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js">
-    </script>
-    <script type="text/javascript"
-     src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js">
-    </script>
-    <script type="text/javascript"
-     src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.pt-BR.js">
-    </script>
-    <script type="text/javascript">
-      $('#datetimepicker').datetimepicker({
-        format: 'yyyy-MM-dd hh:mm:ss',
-        language: 'pt-BR'
-      });
-    </script>-->
 
 {% endblock %}

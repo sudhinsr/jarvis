@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/application.css') }}">
     <link rel="shortcut icon" href="{{ url_for('static', filename='img/j.jpg') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/jquery.datetimepicker.css') }}"/ >
+    <script src="{{ url_for('static', filename='css/jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename='css/jquery.datetimepicker.full.min.js') }}"></script>
     {% endblock %}
   </head>
   <body>
@@ -18,13 +21,13 @@
         <p>A Simple Personal Assistant.</p>
       </div>
     </div>
-    {% block down %}
-    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+  
+    <!--<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>-->
     <script>
       $('#toggle').click(function() {
         $(this).next('.nav').toggleClass("is-collapsed-mobile");
       });
     </script>
-    {% endblock %}
+
   </body>
 </html>
