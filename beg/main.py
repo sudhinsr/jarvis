@@ -13,10 +13,11 @@ app.config['MYSQL_DATABASE_PASSWORD']='whyte'
 app.config['MYSQL_DATABASE_DB']='jarvis'
 app.config['MYSQL_DATABASE_HOST']='localhost'
 mysql.init_app(app)
-cursor=mysql.connect().cursor()
+
 data = None
 @app.route("/",methods=['GET','POST'])
 def auth():
+	cursor=mysql.connect().cursor()
 	if request.method == 'POST':
 		email=request.form["email"]
 		passw=request.form["passw"]
@@ -41,29 +42,52 @@ def speech():
 
 @app.route("/home",methods=['GET','POST'])
 def home():
-	if request.method == 'POST':
-		switch1=request.form["switch1"]
-		switch2=requst.form["switch2"]
-		"""switch1=op(switch1)
-		switch2=op(switch2)"""
-		print switch1
-		print switch2
-
-	def op(val):
-		if val == 1:
-			return 0
-		else:
-			return 1
-
 	data = request.args['name']
+	def rconv(device):
+		if (device=="switchOn"):
+			s_id='1'
+			status='1'
+
+		elif (device=="switchOff"):
+			s_id='1'
+			status='0'
+
+		elif (device=="lightOn"):
+			s_id='2'
+			status='1'
+
+		elif (device=="lightOff"):
+			s_id='2'
+			status='0'
+
+		con=mysql.connect()
+		cursor=con.cursor()
+		cursor.execute("INSERT INTO switch (s_id,status,user) VALUES ('"+s_id+"','"+status+"','"+data+"')")
+		con.commit()
+
+
+
+	if request.method == 'POST':
+		device=request.form["device"]
+		if(device != None):
+			rconv(device)
+
+
+	cursor=mysql.connect().cursor()
 	cursor.execute("select humidity,temperature from sensor order by id desc")
 	sensor=cursor.fetchone()
 	cursor.execute("select s_id,status from switch where s_id='1' order by id desc")
-	switch1=cursor.fetchone()
+	switch=cursor.fetchone()
 	cursor.execute("select s_id,status from switch where s_id='2' order by id desc")
-	switch2=cursor.fetchone()
+	light=cursor.fetchone()
+		
+	def conv(n):
+		if n == '0':
+			return "On"
+		else:
+			return "Off"
 
-	return render_template('home.html',data=data,humidity=sensor[0],temperature=sensor[1],switch1=switch1[1],switch2=switch2[1])
+	return render_template('home.html',data=data,humidity=sensor[0],temperature=sensor[1],switch=conv(switch[1]),light=conv(light[1]))
 
 def gen(camera):
 	while True:
@@ -80,4 +104,4 @@ def video_feed():
 
 if __name__ == '__main__':
 	app.debug = True
-	app.run(host="192.168.0.110")
+	app.run(host="localhost")

@@ -1,7 +1,7 @@
 import re
 import MySQLdb as mdb
 
-WORDS = ["LIGHT","ON"]
+WORDS = ["LIGHT","OFF"]
 
 def handle(mic):
 	con = mdb.connect('localhost', 'root', 'whyte', 'jarvis')

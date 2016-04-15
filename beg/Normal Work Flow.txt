@@ -1,0 +1,124 @@
+Normal Work Flow
+-----------------
+1.register (tkinter) stores in user table
+2.username n password input
+3.login (tkinter) checks with user table
+4.system start to listen
+5.passive listener listen in backgroud
+6.checking for hotword 'jarvis'
+7.once accept change mode to active else stay in passive checks for hot word 
+8.once change to active mode modules for particular text is finded
+10.do the operations/ update db if any
+11.produce sound output
+
+Speech
+-------
+1.both active and passive mode 
+2.inputs are speech
+3.inputed speech ins converted with text using prelearned language kit
+4.language kit contais dictionary,language model,hidden markov model, vocabulary
+5.dictionary contain all the words and matched result will be returned
+6.this is for both aactive and passive mthods
+7.in passive mode only checks for hotword jarvis once find mode will be changed into active mode
+8.and try to accept the word for module finding
+10.above is the processing algorithm
+
+how we find a person is talking or not?
+---------------------------------------
+1.initially we sample the audio input
+2.calculate the threshold
+3.set the threshold as backgroud threshold
+4.listen to the mic
+5.read the inputs simultaniously
+6.once threshold rise which means some noise is produced 
+7.save it into wav file and pass to speech operation
+8.continue this process in passive listen for hotword detection
+9.noise detection algorithm
+
+module selection-detection
+--------------------------
+1.each module contain two functions
+2.handle() and isValid()
+3.once keyword from active mode obtained it will cheks with all the modules
+4.if isValid() of a prticular module returns true
+5.then use that module
+6.handle() function do the operation for that specif module
+7.else checks other modules isValid until return true or through all modules
+9.above is the algorithm for module selection
+
+Networking
+-----------
+1.here we are using the concept of distributed computing
+2.server-client relation
+3.rasspberry pi act as the central server
+4.pi needs static ip
+5.databses are also stored in the pi
+
+website & database
+-------------------
+1.for website we use python
+2.which will act as a rest api
+3.when the users request for particular operatioon 
+4.it will perform the operation
+5.if any database operation thn it will do it
+6.like switch on, reading temprature and humidity
+7.motion detection in room
+
+switch/sensor working
+----------------------
+1.their is a table for switch control
+2.once their is change occur in table then it will be returned
+3.their is lister 
+4.listen whole time in table and returned the value to arduino through serial communication
+5.the same listner read the inputs from the arduino temprature/hummidity
+6.once their is change of temprature is occured compared to previous 
+7.temprature / humidity values will be updated in sensor table along with time
+8.these values are returned if necessary
+
+android-app
+------------
+1.open the app n press button to speak
+2.once switch is pressed it starts to record 
+3.until a silence is occured
+4.convert the speech into text using google speech library
+5.the library is perfect one 
+6.the library is perfect because of its result of more than 6-10 yrs and still trying to make more precise
+7.once speech is converted text
+8.it will send to our flask rest api as a http request
+9.once rest api get the txt process changes to normal flow
+10.txt is handover to module selector then do the operations
+
+txt to speech process
+---------------------
+1.input is processed text
+2.once the text is obtained it further send to kernal with the support of festival framework
+3.it further transform into a wav  file
+4.once the text is converted to a wav file
+5.its played throgh a sound player to produce sound
+
+motion detection
+----------------
+1.initially capture a video frame using camera
+2.set it as background image
+3.dynamically capture images
+4.compare these dynamic images with background images
+5.pixel to pixel comparison
+6.once change in pixel occured it will assume as a motion occured
+7.its the motion detection algorithm
+8.out put can be viewed in a website as motion jpeg
+9.for printing the jpeg in website it is coverted into bytes
+10.its the motion detection
+
+currently inputting hotwords
+----------------------------
+Time
+Temprature
+Humidity
+light on
+light off
+News
+
+on progress:
+weather
+music
+sheduler(alarm)

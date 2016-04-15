@@ -4,11 +4,11 @@ import re
 
 WORDS = ["HUMIDITY"]
 
-con = mdb.connect('localhost', 'root', 'whyte', 'jarvis')
-cur=con.cursor()
+
 def handle(mic):
 
-
+    con = mdb.connect('localhost', 'root', 'whyte', 'jarvis')
+    cur=con.cursor()
     cur.execute("select humidity from sensor order by date desc")
     temp=cur.fetchone()
     temp=str(temp)

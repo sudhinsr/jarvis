@@ -1,8 +1,83 @@
-{{ data }}</br>
-{{ humidity }}</br>
-{{ temperature }}
-<form action="" method="post">
-	<input class="btn btn-default" type="submit" name="switch1" value="{{ switch1 }}" >
-	<input class="btn btn-default" type="submit" name="switch2" value="{{ switch2 }}" >
+{% extends "base.html" %}
+{% block head %}
+<!--<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen"
+     href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">-->
+{% endblock %}
+{% block content %}
+<!--{{ data }}-->
 
-</form>
+<div class="centered grid__col--4">
+        <img class="img--avatar" src="{{ url_for('static', filename='img/jarvis.jpg') }}" alt="Avatar">
+  </div>
+ <div class="grid">
+
+
+      <div class="grid__col--7">
+  
+      <p id="demo"></p>
+
+<script>
+var d = new Date();
+document.getElementById("demo").innerHTML = d;
+</script>
+      <h4>Switch status</h4>
+    <form action="" method="post">
+      <span>
+      Switch &nbsp;:
+		  <button {% if switch == "On" %} class="btn--success" {% else %} class="btn--error" {% endif %} name="device" value="switch{{ switch }}">{{ switch }}</button></span>
+      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		  Light&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
+		  <button {% if light == "On" %} class="btn--success" {% else %} class="btn--error" {% endif %} name="device" value="light{{ light }}">{{ light }}</button></span>
+		
+    </form>
+
+<div id="datetimepicker" class="input-append date">
+      <input type="text"></input>
+      <span class="add-on">
+        <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+      </span>
+    </div>
+
+
+     
+  </div>
+      <div class="grid__col--4">
+        <h4>Room Status</h4>
+        <div class="offcanvas">
+          <span class="icn--close">
+            <b class="srt">close</b>
+          </span>
+          <ul class="menu" role="navigation">
+            <a class="menu__link" href="#">Temprature</a>
+            <a class="menu__link" href="#">{{ temperature }} &#8451;</a>
+            <a class="menu__link" href="#">Humidity</a>
+            <a class="menu__link--end" href="#">{{ humidity }} &#37;</a>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+{% endblock %}
+
+{% block down %}
+<!--<script type="text/javascript"
+     src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js">
+    </script> 
+    <script type="text/javascript"
+     src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js">
+    </script>
+    <script type="text/javascript"
+     src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js">
+    </script>
+    <script type="text/javascript"
+     src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.pt-BR.js">
+    </script>
+    <script type="text/javascript">
+      $('#datetimepicker').datetimepicker({
+        format: 'yyyy-MM-dd hh:mm:ss',
+        language: 'pt-BR'
+      });
+    </script>-->
+
+{% endblock %}

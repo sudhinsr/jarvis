@@ -2,7 +2,7 @@ import serial
 import MySQLdb as mdb
 import time
 con = mdb.connect('localhost', 'root', 'whyte', 'jarvis')
-ser=serial.Serial('/dev/ttyUSB6',9600)
+ser=serial.Serial('/dev/ttyUSB1',9600)
 ot=0
 while True:
 	time.sleep(2)
