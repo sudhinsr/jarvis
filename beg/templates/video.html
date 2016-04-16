@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="grid__col--12 panel--padded--centered">
+       <img class="img--avatar" src="{{ url_for('static', filename='img/j.jpg') }}" alt="Avatar">
+        <nav class="navbar" role="navigation">
+        <ul class="nav is-collapsed-mobile">
+            <li class="nav__item"><a href="{{ url_for('home',name=data) }}">Home</a></li>
+            <li class="nav__item"><a href="{{ url_for('notif',name=data) }}">Notifications</a></li>
+            <li class="nav__item--current"><a href="{{ url_for('video',name=data) }}">Camera</a></li>
+            <li class="nav__item"><a href="{{ url_for('logout') }}">Logout</a></li>
+          </ul>
+          </nav>
+</br>
+</br>
+          <div class="grid">
+    <img id="bg" src="{{ url_for('video_feed') }}">
+    </div>
+  </div>
+   
+  {% endblock %}

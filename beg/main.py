@@ -17,7 +17,8 @@ mysql.init_app(app)
 data = None
 @app.route("/",methods=['GET','POST'])
 def auth():
-	cursor=mysql.connect().cursor()
+	con=mysql.connect()
+	cursor=con.cursor()
 	if request.method == 'POST':
 		email=request.form["email"]
 		passw=request.form["passw"]
@@ -26,7 +27,7 @@ def auth():
 		data = cursor.fetchone()
 
 		if data is None:
-			return " Error"
+			return render_template('index.html')
 		else:
 			return redirect(url_for('home',name=data[0]))
 	return render_template('index.html')
@@ -38,6 +39,40 @@ def speech():
 	qry.append(txt)
 	s.select(qry)
 	return 
+
+@app.route("/notdel",methods=['POST'])
+def notdel():
+	data = request.args['name']
+	if request.method == 'POST':
+		nid=request.form["nid"]
+		con=mysql.connect()
+		cursor=con.cursor()
+		cursor.execute("delete from notif where notif_id="+nid+"")
+		con.commit()
+		con.close()
+		return redirect(url_for('notif',name=data))
+
+
+@app.route("/notif",methods=['GET','POST'])
+def notif():
+	
+	data = request.args['name']
+	if request.method == 'POST':
+		date=request.form["date"]
+		msg=request.form["msg"]
+		con=mysql.connect()
+		cursor=con.cursor()
+		cursor.execute("INSERT INTO notif (content,date,user) VALUES ('"+msg+"','"+date+"','"+data+"')")
+		con.commit()
+		con.close()
+		
+	con=mysql.connect()
+	cursor=con.cursor()
+	cursor.execute("select * from notif order by date")
+	table=cursor.fetchall()
+	con.close()
+	return render_template('notif.html',table=table,data=data)
+
 
 
 @app.route("/home",methods=['GET','POST'])
@@ -64,22 +99,27 @@ def home():
 		cursor=con.cursor()
 		cursor.execute("INSERT INTO switch (s_id,status,user) VALUES ('"+s_id+"','"+status+"','"+data+"')")
 		con.commit()
+		con.close()
 
 
 
 	if request.method == 'POST':
 		device=request.form["device"]
+
 		if(device != None):
 			rconv(device)
 
 
-	cursor=mysql.connect().cursor()
+
+	con=mysql.connect()
+	cursor=con.cursor()
 	cursor.execute("select humidity,temperature from sensor order by id desc")
 	sensor=cursor.fetchone()
 	cursor.execute("select s_id,status from switch where s_id='1' order by id desc")
 	switch=cursor.fetchone()
 	cursor.execute("select s_id,status from switch where s_id='2' order by id desc")
 	light=cursor.fetchone()
+	con.close()
 		
 	def conv(n):
 		if n == '0':
@@ -94,10 +134,18 @@ def gen(camera):
 		frame = camera.get_frame()
 		yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
 
-@app.route('/video')
+@app.route('/logout')
+def logout():
+	return redirect(url_for('auth'))
+
+@app.route('/video_feed')
 def video_feed():
 	return Response(gen(VideoCamera()),mimetype='multipart/x-mixed-replace; boundary=frame')
 
+@app.route('/video')
+def video():
+	data = request.args['name']
+	return render_template('video.html',data=data)
 
 
 

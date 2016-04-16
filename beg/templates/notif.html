@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="grid__col--12 panel--padded--centered">
+       <img class="img--avatar" src="{{ url_for('static', filename='img/j.jpg') }}" alt="Avatar">
+        <nav class="navbar" role="navigation">
+        <ul class="nav is-collapsed-mobile">
+            <li class="nav__item"><a href="{{ url_for('home',name=data)}}">Home</a></li>
+            <li class="nav__item--current"><a href="{{ url_for('notif',name=data) }}">Notifications</a></li>
+            <li class="nav__item"><a href="{{ url_for('video',name=data) }}">Camera</a></li>
+            <li class="nav__item"><a href="{{ url_for('logout') }}">Logout</a></li>
+          </ul>
+          </nav>
+  </div>
+
+<div class="grid">
+     
+   
+<div class="centered grid__col--7">
+<form method="post" action="{{ url_for('notdel',name=data) }}">
+<table border="2" style="width:100%;">
+<thead>
+  <tr>
+     <th>Sl</th>
+     <th>Content</th>
+     <th>Notification Time</th>
+     <th>Submit Time</th>
+     <th>User ID</th>
+     <th>Delete</th>
+  </tr>
+ </thead>
+<tbody>
+{% set count=1 %}
+{% for item in table %}
+<tr>
+    <td>{{ count }}</td>
+    <td>{{ item[1] }}</td>		
+    <td>{{ item[2] }}</td>
+    <td>{{ item[3] }}</td>
+    <td>{{ item[4] }}</td>
+    <td><button class="btn--warning" type="submit" name="nid" value="{{ item[0] }}" > Delete</button></td>
+  </tr>
+  {% set count=count+1 %}
+
+{% endfor %}
+</tbody>
+</table>
+</form>
+</div>
+</div>
+{% endblock %}

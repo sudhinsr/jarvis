@@ -1,15 +1,23 @@
 {% extends "base.html" %}
 
 {% block content %}
-<!--{{ data }}-->
 
-<div class="centered grid__col--4">
-        <img class="img--avatar" src="{{ url_for('static', filename='img/jarvis.jpg') }}" alt="Avatar">
+<div class="grid__col--12 panel--padded--centered">
+        <img class="img--avatar" src="{{ url_for('static', filename='img/j.jpg') }}" alt="Avatar">
+        <nav class="navbar" role="navigation">
+        <ul class="nav is-collapsed-mobile">
+            <li class="nav__item--current"><a href="{{ url_for('home',name=data) }}">Home</a></li>
+            <li class="nav__item"><a href="{{ url_for('notif',name=data) }}">Notifications</a></li>
+            <li class="nav__item"><a href="{{ url_for('video',name=data) }}">Camera</a></li>
+            <li class="nav__item"><a href="{{ url_for('logout') }}">Logout</a></li>
+          </ul>
+          </nav>
   </div>
+  
  <div class="grid">
 
 
-      <div class="grid__col--6">
+      <div class="grid__col--7">
   
       <p id="demo"></p>
 
@@ -27,20 +35,19 @@ document.getElementById("demo").innerHTML = d;
 		  <button type="submit" {% if light == "On" %} class="btn--success" {% else %} class="btn--error" {% endif %} name="device" value="light{{ light }}">{{ light }}</button></span>
 		
     </form>
-<h4>Notifications</h4>
-<form class="form" method="post">
-<input class="form__input" id="datetimepicker" type="text" placeholder="Date/Time">
+<h4>Add Notifications</h4>
+<form class="form" method="post" action="{{ url_for('notif',name=data) }}">
+<input class="form__input" id="datetimepicker" name="date" type="text" placeholder="Date/Time">
 <textarea class="form__input" name="msg" placeholder="Message..." rows="2"></textarea>
-<button type="submit" class="btn--info">Insert</button>
+<button type="submit"  class="btn--info">Insert</button>
+<submit name="notif" value="insert"/>
 </form>
 <script type="text/javascript">jQuery('#datetimepicker').datetimepicker();</script>
 
      
   </div>
 
-  <div class="grid__col--5">
-  </div>
-      <div class="grid__col--3">
+      <div class="grid__col--4">
         <h4>Room Status</h4>
         <div class="offcanvas">
           <span class="icn--close">
