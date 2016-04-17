@@ -25,7 +25,7 @@ class Text(object):
 			else :
 				self.tts_engine.say("Pardon?")
 
-
-app = Text()
-app.handle()
+def text():
+	app = Text()
+	app.handle()
 

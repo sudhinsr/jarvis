@@ -16,10 +16,5 @@ def handle(mic):
 
 
 def isValid(text):
-    """
-        Returns True if input is related to the time.
-
-        Arguments:
-        text -- user-input, typically transcribed speech
-    """
+    
     return bool(re.search(r'\btemperature\b', text, re.IGNORECASE))

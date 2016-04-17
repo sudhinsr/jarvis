@@ -31,18 +31,7 @@ def getTopArticles(maxResults=None):
 
 def handle(mic):
 	
-    """
-        Responds to user-input, typically speech text, with a summary of
-        the day's top news headlines, sending them to the user over email
-        if desired.
-
-        Arguments:
-        text -- user-input, typically transcribed speech
-        mic -- used to interact with the user (for both input and output)
-        profile -- contains information related to the user (e.g., phone
-                   number)
-    """
-    
+  
     mic.say("Pulling up the news")
     articles = getTopArticles(maxResults=3)
     titles = [" ".join(x.title.split(" - ")[:-1]) for x in articles]
@@ -54,10 +43,5 @@ def handle(mic):
 
 
 def isValid(text):
-    """
-        Returns True if the input is related to the news.
-
-        Arguments:
-        text -- user-input, typically transcribed speech
-    """
+   
     return bool(re.search(r'\b(news|headline)\b', text, re.IGNORECASE))

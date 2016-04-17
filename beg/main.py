@@ -147,9 +147,7 @@ def video():
 	data = request.args['name']
 	return render_template('video.html',data=data)
 
-
-
-
-if __name__ == '__main__':
+def web():
 	app.debug = True
-	app.run(host="192.168.0.110")
+	app.run(host="localhost")
+
