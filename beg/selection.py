@@ -22,14 +22,15 @@ class Selection(object):
 					print "Warning"
 		modules.sort(key=lambda mod: mod.PRIORITY if hasattr(mod, 'PRIORITY')
                      else 0, reverse=True)
-		print modules
+		for module in modules:
+			print module
 		return modules
 
 	def select(self,texts):
 		print "selecting"
 		for module in self.extensions:
 			for text in texts:
-				print text
+			
 				if module.isValid(text):
 					try:
 						print module

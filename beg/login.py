@@ -2,7 +2,7 @@ from Tkinter import *
 import MySQLdb as mdb
 from main import web
 from text import text
-from multiprocessing import Process
+import threading
 
 class App:
 	def __init__(self,window):
@@ -15,6 +15,8 @@ class App:
 		self.window.geometry("300x350")
 		self.status="Enter details"
 		self.create()
+		self.t1=threading.Thread(target=web)
+		self.t2=threading.Thread(target=text)
 
 	def register(self):
 		fname=self.u5.get()
@@ -81,15 +83,18 @@ class App:
 		self.u7.pack()
 		self.u8.pack()
 		self.u9.pack()
-		p=Process(target=pro)
-		p.start()
-		p.join()
+		
+		
+		self.t1.start()
+		self.t2.start()
 
 		
 
 		
 	
 	def logout(self):
+		self.t1._stop()
+		self.t2._stop()
 		self.u3.pack_forget()
 		self.u4.pack_forget()
 		self.u5.pack_forget()
@@ -183,13 +188,7 @@ class App:
 		self.u8.pack()
 		self.u9.pack()
 
-def pro():
-	p1=Process(target=web)
-	p1.start()
-	p2=Process(target=text)
-	p2.start()
-	p1.join()
-	p2.join()
+
 
 root = Tk() 
 app=App(root)

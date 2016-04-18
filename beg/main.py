@@ -4,6 +4,8 @@ from tts import TTS
 from selection import Selection
 from camera import VideoCamera
 
+
+
 tts=TTS()
 s=Selection(tts)
 mysql=MySQL()
@@ -148,6 +150,6 @@ def video():
 	return render_template('video.html',data=data)
 
 def web():
-	app.debug = True
+	app.debug = False
 	app.run(host="localhost")
 
