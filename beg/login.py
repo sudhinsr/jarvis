@@ -1,8 +1,9 @@
 from Tkinter import *
 import MySQLdb as mdb
 from main import web
-from text import text
+from relay import relay
 import threading
+import os
 
 class App:
 	def __init__(self,window):
@@ -16,7 +17,7 @@ class App:
 		self.status="Enter details"
 		self.create()
 		self.t1=threading.Thread(target=web)
-		self.t2=threading.Thread(target=text)
+		self.t2=threading.Thread(target=relay)
 
 	def register(self):
 		fname=self.u5.get()
@@ -25,7 +26,8 @@ class App:
 		email=self.u11.get()
 		pasw=self.u13.get()
 		rpasw=self.u15.get()
-		if(pasw == rpasw):
+		ed=re.match("^.+\\@(\\[?)[a-zA-Z0-9\\-\\.]+\\.([a-zA-Z]{2,3}|[0-9]{1,3})(\\]?)$", email)
+		if(pasw == rpasw && ed != None):
 			try:
 				self.cur.execute("insert into users (fname,lname,email,phone,password) values ('"+fname+"','"+lname+"','"+email+"','"+phn+"','"+pasw+"')")
 				self.con.commit()
@@ -86,15 +88,14 @@ class App:
 		
 		
 		self.t1.start()
-		self.t2.start()
+		#self.t2.start()
 
 		
 
 		
 	
 	def logout(self):
-		self.t1._stop()
-		self.t2._stop()
+
 		self.u3.pack_forget()
 		self.u4.pack_forget()
 		self.u5.pack_forget()
@@ -102,6 +103,7 @@ class App:
 		self.u7.pack_forget()
 		self.u8.pack_forget()
 		self.u9.pack_forget()
+		os.system('kill %d' % os.getpid())
 		self.create()
 
 

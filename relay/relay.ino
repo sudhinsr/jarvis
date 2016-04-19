@@ -29,6 +29,7 @@ void setup(){
 
 void loop(){
   delay(200);
+  int h,t;
   int chk = DHT.read11(DHT11_PIN); 
   
   input=Serial.read();
@@ -44,11 +45,15 @@ void loop(){
   s=0;
   light();
   switc();
-  
-  Serial.print(DHT.humidity, 1); 
-  Serial.print("\t");   
-  Serial.println(DHT.temperature, 1); 
+  h=DHT.humidity;
+  t=DHT.temperature;
  
+  if(h > 10 && t > 10 && h < 100 && t < 100)
+  {
+  Serial.print(h, 1); 
+  Serial.print("\t");   
+  Serial.println(t, 1); 
+  }
 
 }
  
