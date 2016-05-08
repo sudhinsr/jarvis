@@ -13,9 +13,9 @@ WORDS = ["MUSIC"]
 
 def handle():
 	files = os.listdir("music")
-	selc="music/"+random.choice(files)
-	mus=threading.Thread(target=play,args=(selc,))
-	mus.start()
+		
+
+play"music/"+random.choice(files))
 
 def play(TRACKS):
 	TRACK_END = pg.USEREVENT+1

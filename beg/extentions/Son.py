@@ -11,7 +11,7 @@ def handle(mic):
 		con.commit()		
 	if con:
 		con.close()
-	mic.say("light turning on")
+	mic.say("Switch turning on")
 
 
 def isValid(text):
